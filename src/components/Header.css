@@ -1,0 +1,242 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 249, 243, 0.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.header--scrolled {
+  border-bottom-color: rgba(181, 138, 58, 0.28);
+  background: rgba(255, 249, 243, 0.95);
+}
+
+.header__inner {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header__brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+  margin-right: auto;
+  /* Never compress or wrap the lockup */
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.header__brand-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--brown);
+  letter-spacing: 0.01em;
+}
+
+.header__brand-sub {
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-top: 3px;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  /* Nav absorbs the squeeze before the brand or CTA do */
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.header__link {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  padding-block: 0.25rem;
+  border-bottom: 1px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+  white-space: nowrap;
+}
+
+.header__link:hover,
+.header__link.is-active {
+  color: var(--brown);
+  border-bottom-color: var(--gold);
+}
+
+.header__cta {
+  padding: 13px 24px;
+  font-size: 0.9375rem;
+  /* Must stay on one line — the global .btn has no nowrap, so under flex
+     pressure the label was breaking across two rows. */
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-height: 46px;
+}
+
+.header__toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid rgba(181, 138, 58, 0.4);
+  border-radius: var(--radius);
+  cursor: pointer;
+  position: relative;
+}
+
+.header__bars,
+.header__bars::before,
+.header__bars::after {
+  position: absolute;
+  left: 50%;
+  width: 18px;
+  height: 1.5px;
+  background: var(--brown);
+  transform: translateX(-50%);
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.header__bars {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header__bars::before,
+.header__bars::after {
+  content: "";
+  left: 0;
+  transform: none;
+}
+
+.header__bars::before {
+  top: -6px;
+}
+
+.header__bars::after {
+  top: 6px;
+}
+
+.header__bars.is-open {
+  background: transparent;
+}
+
+.header__bars.is-open::before {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.header__bars.is-open::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.header__mobile {
+  display: none;
+  border-top: 1px solid rgba(181, 138, 58, 0.2);
+  background: var(--ivory);
+  padding: 0.5rem 1.25rem 1.5rem;
+}
+
+.header__mobile-link {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(90, 48, 31, 0.08);
+}
+
+/* ---- Responsive ---- */
+
+/* Between 1100px and 1320px the 8-item nav crowds the CTA, so tighten the
+   spacing before falling back to the hamburger. */
+@media (max-width: 1320px) {
+  .header__inner {
+    gap: 1.25rem;
+    padding-inline: 1.5rem;
+  }
+  .header__nav {
+    gap: 1rem;
+  }
+  .header__link {
+    font-size: 0.9375rem;
+    letter-spacing: 0.02em;
+  }
+  .header__cta {
+    padding: 12px 18px;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+  }
+}
+
+@media (max-width: 1180px) {
+  .header__nav {
+    display: none;
+  }
+  .header__toggle {
+    display: block;
+    order: 3;
+  }
+  .header__mobile {
+    display: block;
+  }
+  .header__mobile[hidden] {
+    display: none;
+  }
+  .header__inner {
+    padding: 0.875rem 1.25rem;
+    gap: 0.75rem;
+  }
+}
+
+/* The ticket CTA stays reachable on mobile at all times. It scales down in
+   steps rather than disappearing — the global .btn min-height of 52px is too
+   tall for a header bar, so it's relaxed here while staying tappable. */
+@media (max-width: 1180px) {
+  .header__cta {
+    padding: 11px 20px;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    min-height: 44px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 560px) {
+  .header__cta {
+    padding: 10px 15px;
+    font-size: 0.8125rem;
+    letter-spacing: 0.03em;
+    min-height: 42px;
+  }
+}
+
+@media (max-width: 400px) {
+  .header__inner {
+    padding: 0.75rem 1rem;
+    gap: 0.5rem;
+  }
+  .header__cta {
+    padding: 9px 12px;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header__brand-name {
+    font-size: 1.25rem;
+  }
+}

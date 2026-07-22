@@ -1,0 +1,59 @@
+:root {
+  /* Core palette — 60% ivory/cream, 20% dark brown, 10% rose, 10% gold */
+  --ivory: #fff9f3;
+  --cream: #f7eee5;
+  --champagne: #e8d2be;
+  --gold: #b58a3a;
+  /* TEXT golds. #B58A3A measures 3.02:1 on cream — fails AA for body text.
+     These are measured to pass: use for any gold-colored TEXT or icon.
+     Plain --gold stays for fills, borders, and button backgrounds. */
+  --gold-deep: #6f5019;
+  --rose: #c98787;
+  /* TEXT rose. #C98787 measures 2.51:1 on cream. This passes AA at 4.5:1. */
+  --rose-deep: #8c3d3d;
+  --brown: #4a2617;
+  --ink: #2a1b15;
+  /* Muted body text — a real color, not opacity. Opacity over cream was
+     turning brown into washed grey. */
+  --ink-muted: #5c4739;
+  --soft-black: #18110e;
+
+  /* Semantic — light sections */
+  --bg: var(--cream);
+  --bg-alt: var(--ivory);
+  --heading: var(--brown);
+  --body: var(--ink);
+  --btn-bg: var(--gold);
+  --btn-text: var(--ivory);
+  --btn-hover-bg: var(--brown);
+
+  /* Typography */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-script: "Allura", cursive;
+
+  /* Spacing scale */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-2xl: 8rem;
+
+  --radius: 6px;
+  --maxw: 1180px;
+  --maxw-narrow: 760px;
+
+  --shadow-soft: 0 18px 50px -24px rgba(90, 48, 31, 0.28);
+  --transition: 240ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark section scope */
+.section--dark {
+  --bg: var(--soft-black);
+  --heading: var(--champagne);
+  --body: var(--ivory);
+  --btn-bg: var(--rose);
+  --btn-text: var(--soft-black);
+  --btn-hover-bg: var(--champagne);
+}

@@ -1,0 +1,255 @@
+.retreat-hero {
+  position: relative;
+  padding: clamp(4rem, 9vw, 8rem) var(--space-md);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 85% 18%, rgba(201, 135, 135, 0.32), transparent 28%),
+    radial-gradient(circle at 12% 90%, rgba(181, 138, 58, 0.14), transparent 30%),
+    var(--cream);
+}
+
+.retreat-hero::after {
+  position: absolute;
+  right: -120px;
+  bottom: -220px;
+  width: 520px;
+  height: 520px;
+  border: 1px solid rgba(181, 138, 58, 0.2);
+  border-radius: 50%;
+  content: "";
+}
+
+.retreat-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: clamp(2.5rem, 7vw, 6rem);
+  align-items: end;
+}
+
+.retreat-hero__content .script {
+  margin: 0.9rem 0 0.2rem;
+  color: var(--rose-deep);
+}
+
+.retreat-hero__content h1 {
+  max-width: 13ch;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 1;
+}
+
+.retreat-hero__content .lede {
+  max-width: 48ch;
+  margin-top: 1.5rem;
+}
+
+.retreat-hero__cta {
+  margin-top: 1.75rem;
+}
+
+.retreat-hero__facts {
+  overflow: hidden;
+  border: 1px solid rgba(181, 138, 58, 0.3);
+  border-radius: 20px;
+  background: rgba(255, 249, 243, 0.78);
+  box-shadow: 0 20px 55px rgba(42, 27, 21, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.retreat-hero__facts div {
+  padding: 1.35rem 1.5rem;
+  border-bottom: 1px solid rgba(181, 138, 58, 0.2);
+}
+
+.retreat-hero__facts div:last-child {
+  border-bottom: 0;
+}
+
+.retreat-hero__facts span {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--gold-deep);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.retreat-hero__facts strong {
+  color: var(--brown);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.retreat-intro {
+  padding-block: clamp(3.5rem, 7vw, 6rem);
+}
+
+.retreat-intro__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.retreat-intro__grid h2 {
+  margin: 0.45rem 0 1.25rem;
+}
+
+.retreat-invitation {
+  position: relative;
+  margin: 0;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  border: 1px solid rgba(181, 138, 58, 0.26);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(201, 135, 135, 0.28), transparent 38%),
+    var(--ivory);
+  color: var(--brown);
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2.6vw, 2.15rem);
+  line-height: 1.45;
+  box-shadow: 0 16px 45px rgba(42, 27, 21, 0.07);
+}
+
+.retreat-invitation .script {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--rose-deep);
+  font-size: 1.65rem;
+}
+
+.retreat-pillars-section {
+  background:
+    radial-gradient(circle at 50% 0, rgba(201, 135, 135, 0.12), transparent 38%),
+    var(--soft-black);
+}
+
+.retreat-section-heading {
+  max-width: 700px;
+  margin: 0 auto var(--space-lg);
+  text-align: center;
+}
+
+.retreat-section-heading h2 {
+  margin-top: 0.45rem;
+  color: var(--champagne);
+}
+
+.retreat-pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.retreat-pillars article {
+  padding: 1.75rem;
+  border: 1px solid rgba(232, 210, 190, 0.22);
+  border-radius: 16px;
+  background: rgba(255, 249, 243, 0.025);
+}
+
+.retreat-pillars article > span {
+  color: var(--gold-deep);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.retreat-pillars h3 {
+  margin: 1rem 0 0.7rem;
+  color: var(--champagne);
+  font-size: 1.55rem;
+}
+
+.retreat-pillars p {
+  color: rgba(255, 249, 243, 0.78);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.retreat-audience-section {
+  padding-block: clamp(3.5rem, 7vw, 6rem);
+}
+
+.retreat-audience {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+  padding: clamp(2rem, 5vw, 4rem);
+  border: 1px solid rgba(181, 138, 58, 0.24);
+  border-radius: 24px;
+  background: var(--ivory);
+  box-shadow: 0 16px 45px rgba(42, 27, 21, 0.07);
+}
+
+.retreat-audience__heading h2 {
+  margin: 0.45rem 0 1rem;
+}
+
+.retreat-audience__heading > p:last-child {
+  color: var(--ink-muted);
+  line-height: 1.75;
+}
+
+.retreat-audience ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.retreat-audience li {
+  display: flex;
+  gap: 0.7rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(90, 48, 31, 0.09);
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.retreat-audience li span {
+  color: var(--gold-deep);
+}
+
+.retreat-next-step .page-cta__inner .lede {
+  color: rgba(255, 249, 243, 0.8);
+}
+
+.retreat-next-step .btn--secondary {
+  color: var(--champagne);
+  border-color: var(--gold);
+}
+
+@media (max-width: 900px) {
+  .retreat-hero__inner,
+  .retreat-intro__grid,
+  .retreat-audience {
+    grid-template-columns: 1fr;
+  }
+
+  .retreat-pillars {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .retreat-hero {
+    padding-inline: 1.25rem;
+  }
+
+  .retreat-pillars,
+  .retreat-audience ul {
+    grid-template-columns: 1fr;
+  }
+
+  .retreat-hero__cta,
+  .retreat-next-step .btn {
+    width: 100%;
+  }
+}

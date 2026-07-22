@@ -1,0 +1,27 @@
+.section-header {
+  max-width: 62ch;
+  margin-bottom: var(--space-lg);
+}
+
+.section-header--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-header .eyebrow {
+  margin-bottom: 0.875rem;
+}
+
+.section-header .script {
+  margin-bottom: 0.25rem;
+}
+
+.section-header h2 + .section-header__body,
+.section-header__body {
+  margin-top: 1.25rem;
+  color: var(--body);
+}
+
+.section-header--center .section-header__body {
+  margin-inline: auto;
+}

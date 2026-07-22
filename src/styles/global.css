@@ -1,0 +1,1055 @@
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--ink);
+  background: var(--cream);
+  /* Antialiasing was thinning strokes and lowering perceived contrast on
+     the cream background. Default rendering keeps the weight. */
+  text-rendering: optimizeLegibility;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 17px;
+  }
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--heading);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6.2vw, 4.75rem);
+  line-height: 1.0;
+  letter-spacing: -1px;
+}
+
+h2 {
+  font-size: clamp(2.125rem, 4.2vw, 3.375rem);
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  font-size: clamp(1.5625rem, 2.4vw, 2.125rem);
+  line-height: 1.2;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Layout primitives ---------- */
+
+.section {
+  background: var(--bg);
+  color: var(--body);
+  padding: var(--space-xl) var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-lg) 1.25rem;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+}
+
+.container--narrow {
+  max-width: var(--maxw-narrow);
+}
+
+/* ---------- Typographic accents ---------- */
+
+.script {
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 3.6vw, 3.125rem);
+  line-height: 1.25;
+  color: var(--rose);
+  font-weight: 400;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  /* Deep gold — plain --gold fails contrast at this size */
+  color: var(--gold-deep);
+}
+
+.lede {
+  font-size: 1.1875rem;
+  line-height: 1.8;
+  max-width: 62ch;
+  /* Must follow the section scope, NOT a hardcoded ink value — on dark
+     sections --body resolves to ivory. Hardcoding --ink here rendered dark
+     text on near-black at 1.13:1, which was invisible. */
+  color: var(--body);
+}
+
+/* Gold hairline divider — used sparingly */
+.rule {
+  width: 64px;
+  height: 1px;
+  border: 0;
+  background: var(--gold);
+  margin: var(--space-sm) 0;
+}
+
+.rule--center {
+  margin-inline: auto;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 17px 32px;
+  min-height: 52px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition),
+    border-color var(--transition);
+  text-align: center;
+}
+
+.btn--primary {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+.btn--primary:hover {
+  background: var(--btn-hover-bg);
+  color: var(--ivory);
+}
+
+.section--dark .btn--primary:hover {
+  color: var(--soft-black);
+}
+
+.btn--secondary {
+  background: transparent;
+  color: var(--heading);
+  border-color: var(--gold);
+}
+
+.btn--secondary:hover {
+  background: var(--champagne);
+  color: var(--brown);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* ---------- Utility ---------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.stack > * + * {
+  margin-top: var(--space-sm);
+}
+
+/* ===========================================================================
+   TYPE SCALE OVERRIDES
+   A uniform bump flattened the hierarchy, so sizes are restated explicitly
+   here. Everything is a step larger than the original design and uses solid
+   colors rather than opacity, for legibility on the cream background.
+   =========================================================================== */
+
+/* --- Micro labels: eyebrows, flags, meta. Small but never below 13px. --- */
+.eyebrow,
+.pillar__num,
+.reserve__step-num,
+.reserve__summary-list dt,
+.footer__heading,
+.package__flag,
+.booking-bar__spots,
+.pending__tag,
+.pending__sub,
+.header__brand-sub {
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+}
+
+/* --- Meta strips under headings --- */
+.hero__details,
+.page-hero__meta,
+.page-cta__meta,
+.final-cta__meta,
+.footer__base {
+  font-size: 0.875rem;
+  letter-spacing: 0.12em;
+}
+
+/* --- Secondary/supporting text: notes, captions, fine print --- */
+.package__note,
+.reserve__option-note,
+.reserve__scarcity,
+.reserve__tbc,
+.testimonials__note,
+.checkbox__flag,
+.faq-item__pending,
+.footer__pending,
+.beat__prompt,
+.package__price--pending,
+.reserve__option-price {
+  font-size: 0.9375rem;
+}
+
+/* --- Standard body-level content --- */
+.pillar__body,
+.details__card p,
+.included__card,
+.package__body,
+.reserve__option-desc,
+.faq-item__a,
+.contact__list,
+.contact__retreat,
+.footer__list,
+.footer__mission,
+.pending__body,
+.pending__list,
+.field input,
+.field textarea,
+.checkbox {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+/* --- Form labels stay compact but legible --- */
+.field label {
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+}
+
+/* --- Navigation --- */
+.header__link {
+  font-size: 0.9375rem;
+}
+
+.header__mobile-link {
+  font-size: 1.0625rem;
+}
+
+/* --- Larger interactive/display text --- */
+.faq-item__q {
+  font-size: 1.375rem;
+}
+
+.reserve__option-name {
+  font-size: 1.5rem;
+}
+
+.who__item,
+.expect__list {
+  font-size: 1.125rem;
+}
+
+.hero__body {
+  font-size: 1.1875rem;
+}
+
+/* --- Restore true micro-label for the brand sub-line only --- */
+.header__brand-sub {
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+}
+
+/* --- Cormorant renders optically small; give headings more presence --- */
+h3 {
+  font-size: clamp(1.6875rem, 2.5vw, 2.25rem);
+}
+
+/* --- Darker gold for small gold text on cream (contrast) --- */
+.reserve__step-num,
+.reserve__summary-list dt,
+.pillar__num {
+  color: var(--gold-deep);
+}
+
+/* Gold on dark backgrounds keeps the brighter tone */
+.section--dark .pillar__num,
+.section--dark .eyebrow,
+.footer__heading {
+  color: var(--gold);
+}
+
+/* ===========================================================================
+   TOUCH TARGETS
+   Audit at 320–430px found footer links ~19px tall and 16px checkboxes.
+   Below ~44px these are hard to hit reliably on a phone.
+   =========================================================================== */
+
+@media (max-width: 1100px) {
+  /* Footer links: pad to a comfortable target without visual bulk */
+  .footer__list a {
+    display: inline-block;
+    padding-block: 0.5rem;
+    min-height: 44px;
+    line-height: 1.6;
+  }
+
+  /* Radio + checkbox inputs */
+  .reserve__option input,
+  .checkbox input {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* The whole option card is the target, so give it room */
+  .reserve__option {
+    padding: 1.5rem 1.25rem;
+    min-height: 44px;
+  }
+
+  /* Checkbox row: enlarge the hit area around the label */
+  .checkbox {
+    padding-block: 0.5rem;
+  }
+
+  /* FAQ accordion rows */
+  .faq-item__q {
+    min-height: 56px;
+  }
+
+  /* Form controls — 16px minimum prevents iOS zoom-on-focus */
+  .field input,
+  .field textarea {
+    font-size: 1.0625rem;
+    padding: 15px 16px;
+    min-height: 52px;
+  }
+
+  .field textarea {
+    min-height: 110px;
+  }
+}
+
+/* ===========================================================================
+   CONTRAST FIXES — measured, not guessed
+   Values verified against WCAG AA (4.5:1 body, 3:1 large text) on a 390px
+   viewport. Each rule below fixes a specific measured failure.
+   =========================================================================== */
+
+/* --- Cards that sit on dark sections keep their light surface --- */
+.section--dark .package,
+.section--dark .included__card,
+.section--dark .practical__card,
+.section--dark .reserve__option,
+.section--dark .testimonial {
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+.section--dark .package__name,
+.section--dark .package__price,
+.section--dark .practical__card h3,
+.section--dark .reserve__option-name,
+.section--dark .testimonial blockquote {
+  color: var(--brown);
+}
+
+.section--dark .package__body,
+.section--dark .included__card,
+.section--dark .reserve__option-desc {
+  color: var(--ink);
+}
+
+.section--dark .package__note,
+.section--dark .reserve__option-note {
+  color: var(--ink-muted);
+}
+
+/* --- Primary button: ivory on #B58A3A measured 3.02:1. Deepen the gold. --- */
+.btn--primary {
+  background: var(--gold-deep);
+  color: #fffdfa;
+}
+
+.btn--primary:hover {
+  background: var(--brown);
+  color: #fffdfa;
+}
+
+/* Dark sections: rose button needs dark text, which already passes */
+.section--dark .btn--primary {
+  background: var(--rose);
+  color: var(--soft-black);
+}
+
+.section--dark .btn--primary:hover {
+  background: var(--champagne);
+  color: var(--soft-black);
+}
+
+/* --- Flags/badges on gold --- */
+.package__flag {
+  background: var(--gold-deep);
+  color: #fffdfa;
+}
+
+/* --- Rose text on cream measured 2.51:1 — use the deeper rose --- */
+.pending__tag,
+.package__price--pending,
+.reserve__option-price,
+.reserve__tbc,
+.checkbox__flag,
+.faq-item__pending,
+.footer__legal {
+  color: var(--rose-deep);
+}
+
+/* Rose on dark backgrounds is fine as-is */
+.section--dark .pending__tag,
+.section--dark .package__price--pending,
+.section--dark .reserve__option-price,
+.footer .footer__legal {
+  color: var(--rose);
+}
+
+/* Cards on dark sections still need the deep rose (light surface) */
+.section--dark .package .package__price--pending,
+.section--dark .reserve__option .reserve__option-price {
+  color: var(--rose-deep);
+}
+
+/* --- Gold text on cream measured 2.75:1 --- */
+.pending__sub,
+.faq-item__icon,
+.beat__num,
+.footer__pending {
+  color: var(--gold-deep);
+}
+
+.section--dark .pending__sub,
+.section--dark .beat__num {
+  color: var(--gold);
+}
+
+/* --- Script accent: rose at 2.51:1 on cream. Deepen it. --- */
+.script {
+  color: var(--rose-deep);
+}
+
+.section--dark .script,
+.hero__script {
+  color: var(--rose);
+}
+
+/* Hero sits on a light gradient, so it needs the deep tone */
+.hero__script {
+  color: var(--rose-deep);
+}
+
+/* --- Brand sub-line: 9px gold. Enlarge and deepen. --- */
+.header__brand-sub {
+  font-size: 0.6875rem;
+  color: var(--gold-deep);
+}
+
+/* --- Pending block borders/labels inside dark cards --- */
+.section--dark .pending {
+  color: var(--ink);
+}
+
+/* --- Footer pending sits on near-black; keep it bright --- */
+.footer .footer__pending {
+  color: var(--rose);
+}
+
+/* ===========================================================================
+   FINAL CONTRAST PASS
+   Component CSS is injected after global.css by the bundler, so these use
+   higher specificity to win rather than relying on source order.
+   =========================================================================== */
+
+/* --- Dark sections: restore the BRIGHT tones (deep tones are for cream) --- */
+.section--dark .pending__tag,
+.section--dark .pending .pending__tag,
+.footer .footer__pending {
+  color: var(--rose);
+}
+
+.section--dark .pending__sub,
+.section--dark .pending .pending__sub,
+.section--dark .beat__num,
+.section--dark .details__investment-heading,
+.footer .footer__heading,
+.section--dark .eyebrow,
+.section--dark .pillar__num {
+  color: var(--gold);
+}
+
+.section--dark .script {
+  color: var(--rose);
+}
+
+/* Pending blocks inside dark sections keep a light-on-dark border */
+.section--dark .pending {
+  border-color: var(--rose);
+}
+
+/* --- Buttons: deepen gold background so ivory text passes AA --- */
+html .btn--primary {
+  background: var(--gold-deep);
+  color: #fffdfa;
+}
+
+html .btn--primary:hover {
+  background: var(--brown);
+  color: #fffdfa;
+}
+
+html .section--dark .btn--primary,
+html .footer__cta {
+  background: var(--rose);
+  color: var(--soft-black);
+}
+
+html .section--dark .btn--primary:hover,
+html .footer__cta:hover {
+  background: var(--champagne);
+  color: var(--soft-black);
+}
+
+/* --- Badge on gold --- */
+html .package__flag {
+  background: var(--gold-deep);
+  color: #fffdfa;
+}
+
+/* --- Hero script sits on a light gradient --- */
+html .hero__script {
+  color: var(--rose-deep);
+}
+
+/* --- Brand sub-line: was 9px gold at 3.02:1 --- */
+html .header__brand-sub {
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  color: var(--gold-deep);
+}
+
+/* --- FAQ accordion icon --- */
+html .faq-item__icon {
+  color: var(--gold-deep);
+}
+
+/* --- Summary rail labels --- */
+html .reserve__summary-list dt {
+  color: var(--gold-deep);
+}
+
+/* --- Secondary button text --- */
+html .btn--secondary {
+  color: var(--brown);
+  border-color: var(--gold-deep);
+}
+
+/* ===========================================================================
+   TOUCH TARGET — brand lockup
+   =========================================================================== */
+.header__brand {
+  min-height: 44px;
+  justify-content: center;
+}
+
+/* ===========================================================================
+   INHERITANCE FIXES — dark-section text that resolved to ink
+   The Pending block and script accents inherit --body/--ink. Inside a dark
+   section that renders near-black on near-black (measured 1.13:1).
+   Scope them to the section instead of a fixed color.
+   =========================================================================== */
+
+/* Pending blocks: light surface on dark sections so the dark ink stays legible.
+   This also keeps them visually distinct as "unfinished" markers. */
+.section--dark .pending {
+  background: rgba(255, 249, 243, 0.06);
+  border-color: var(--rose);
+}
+
+.section--dark .pending,
+.section--dark .pending__body,
+.section--dark .pending__body p,
+.section--dark .pending__list,
+.section--dark .pending__list li,
+.section--dark .pending__title {
+  color: var(--ivory);
+}
+
+.section--dark .pending__title {
+  color: var(--champagne);
+}
+
+.section--dark .pending__body strong,
+.section--dark .pending__list strong {
+  color: var(--champagne);
+}
+
+/* --- Script accent on dark backgrounds must use the BRIGHT rose --- */
+.section--dark .script,
+.final-cta .script,
+.footer .script,
+.footer__script {
+  color: var(--rose);
+}
+
+/* --- Secondary button: ensure readable text on both surfaces --- */
+html .btn--secondary {
+  background: transparent;
+  color: var(--brown);
+  border-color: var(--gold-deep);
+}
+
+html .btn--secondary:hover {
+  background: var(--champagne);
+  color: var(--brown);
+}
+
+/* On dark sections the secondary button needs light text */
+html .section--dark .btn--secondary,
+html .footer .btn--secondary {
+  color: var(--champagne);
+  border-color: var(--gold);
+}
+
+html .section--dark .btn--secondary:hover,
+html .footer .btn--secondary:hover {
+  background: var(--champagne);
+  color: var(--soft-black);
+}
+
+/* Cards on dark sections have light surfaces — buttons inside revert */
+html .section--dark .package .btn--secondary,
+html .section--dark .reserve__option .btn--secondary {
+  color: var(--brown);
+  border-color: var(--gold-deep);
+}
+
+/* ===========================================================================
+   SELF-SCOPED DARK SECTIONS
+   .final-cta carries .section--dark on the SAME element, so descendant
+   selectors like ".section--dark .script" never match its own children
+   via that path. Target it directly.
+   =========================================================================== */
+.section--dark .script,
+.section--dark.final-cta .script,
+.section--dark.footer .script {
+  color: var(--rose);
+}
+
+/* ===========================================================================
+   TOUCH TARGETS — final
+   Component CSS is injected after global.css, so the 16px declarations in
+   Reserve.css win over an unqualified rule. Raise specificity.
+   =========================================================================== */
+html .checkbox input[type="checkbox"],
+html .reserve__option input[type="radio"] {
+  width: 24px;
+  height: 24px;
+  accent-color: var(--gold-deep);
+  flex-shrink: 0;
+}
+
+html .checkbox input[type="checkbox"] {
+  margin-top: 1px;
+}
+
+html .reserve__option input[type="radio"] {
+  margin-top: 3px;
+}
+
+/* ===========================================================================
+   ANIMATED BUTTON INTERACTION
+   A moving multi-color gradient on hover/focus/press.
+
+   NOTE ON COLOR CHOICE: this cycles through the BRAND palette (gold → rose →
+   champagne → brown) rather than a literal spectrum rainbow. A true rainbow
+   would conflict with the luxury positioning in the brief and would break
+   the WCAG contrast work — several spectrum hues cannot carry ivory text at
+   4.5:1. Swap the --btn-flow-* stops below to change the colors.
+   =========================================================================== */
+
+:root {
+  --btn-flow-1: #8a6626;
+  --btn-flow-2: #b58a3a;
+  --btn-flow-3: #c98787;
+  --btn-flow-4: #a85d5d;
+  --btn-flow-5: #6f5019;
+}
+
+html .btn--primary {
+  position: relative;
+  isolation: isolate;
+  background: var(--gold-deep);
+  color: #fffdfa;
+  overflow: hidden;
+  transition: color var(--transition), box-shadow var(--transition),
+    transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* The moving gradient layer, revealed on interaction */
+html .btn--primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    var(--btn-flow-1) 0%,
+    var(--btn-flow-2) 22%,
+    var(--btn-flow-3) 45%,
+    var(--btn-flow-4) 68%,
+    var(--btn-flow-5) 88%,
+    var(--btn-flow-1) 100%
+  );
+  background-size: 300% 100%;
+  background-position: 0% 50%;
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+html .btn--primary:hover,
+html .btn--primary:focus-visible {
+  color: #fffdfa;
+  box-shadow: 0 10px 28px -12px rgba(90, 48, 31, 0.55);
+  transform: translateY(-1px);
+}
+
+html .btn--primary:hover::before,
+html .btn--primary:focus-visible::before {
+  opacity: 1;
+  animation: btn-flow 3.2s linear infinite;
+}
+
+html .btn--primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px -8px rgba(90, 48, 31, 0.5);
+}
+
+@keyframes btn-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* Dark sections: start from rose, flow through the warm tones */
+html .section--dark .btn--primary,
+html .footer__cta {
+  background: var(--rose);
+  color: var(--soft-black);
+}
+
+html .section--dark .btn--primary::before,
+html .footer__cta::before {
+  background: linear-gradient(
+    100deg,
+    var(--rose) 0%,
+    var(--champagne) 25%,
+    #e8c9a0 50%,
+    var(--rose) 75%,
+    var(--champagne) 100%
+  );
+  background-size: 300% 100%;
+}
+
+html .section--dark .btn--primary:hover,
+html .section--dark .btn--primary:focus-visible,
+html .footer__cta:hover {
+  color: var(--soft-black);
+}
+
+/* Secondary buttons get a subtler gradient sweep on the border/background */
+html .btn--secondary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: color var(--transition), border-color var(--transition),
+    transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html .btn--secondary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    rgba(232, 210, 190, 0.9) 0%,
+    rgba(201, 135, 135, 0.55) 40%,
+    rgba(232, 210, 190, 0.9) 75%,
+    rgba(181, 138, 58, 0.5) 100%
+  );
+  background-size: 300% 100%;
+  opacity: 0;
+  transition: opacity 260ms ease;
+}
+
+html .btn--secondary:hover,
+html .btn--secondary:focus-visible {
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+html .btn--secondary:hover::before,
+html .btn--secondary:focus-visible::before {
+  opacity: 1;
+  animation: btn-flow 3.6s linear infinite;
+}
+
+/* Disabled buttons never animate */
+html .btn--primary:disabled,
+html .btn--primary:disabled:hover {
+  background: rgba(90, 48, 31, 0.16);
+  color: var(--ink-muted);
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+html .btn--primary:disabled::before {
+  display: none;
+}
+
+/* Respect reduced-motion: keep the color shift, drop the animation */
+@media (prefers-reduced-motion: reduce) {
+  html .btn--primary:hover::before,
+  html .btn--primary:focus-visible::before,
+  html .btn--secondary:hover::before,
+  html .btn--secondary:focus-visible::before {
+    animation: none;
+    background-position: 50% 50%;
+  }
+  html .btn--primary:hover,
+  html .btn--secondary:hover {
+    transform: none;
+  }
+}
+
+/* ===========================================================================
+   ANIMATED GRADIENT EDGE
+   A flowing multi-color border that runs continuously around action buttons.
+
+   Built with two stacked layers masked to the border area only
+   (border-box minus padding-box), so the button's own background stays
+   solid and the label keeps its measured WCAG contrast — a gradient
+   running under the text would break that.
+
+   COLORS: brand palette (gold → rose → champagne), not a literal spectrum.
+   Swap the --edge-* stops below to change it.
+   =========================================================================== */
+
+:root {
+  --edge-1: #b58a3a;
+  --edge-2: #e8d2be;
+  --edge-3: #c98787;
+  --edge-4: #a85d5d;
+  --edge-5: #8a6626;
+  --edge-width: 2px;
+}
+
+/* The edge layer sits on a wrapper pseudo-element behind the button face */
+html .btn--primary,
+html .btn--secondary {
+  position: relative;
+  isolation: isolate;
+  border-color: transparent;
+}
+
+html .btn--primary::after,
+html .btn--secondary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  padding: var(--edge-width);
+  background: linear-gradient(
+    115deg,
+    var(--edge-1) 0%,
+    var(--edge-2) 18%,
+    var(--edge-3) 36%,
+    var(--edge-4) 54%,
+    var(--edge-5) 72%,
+    var(--edge-2) 86%,
+    var(--edge-1) 100%
+  );
+  background-size: 300% 100%;
+  background-position: 0% 50%;
+  /* Mask to the border ring only — hollow out the middle */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: edge-flow 4s linear infinite;
+}
+
+@keyframes edge-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+/* Faster, brighter on interaction */
+html .btn--primary:hover::after,
+html .btn--primary:focus-visible::after,
+html .btn--secondary:hover::after,
+html .btn--secondary:focus-visible::after {
+  animation-duration: 1.6s;
+  --edge-width: 2.5px;
+}
+
+/* Keep the label above the edge layer */
+html .btn--primary > *,
+html .btn--secondary > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Secondary buttons lose their static border in favour of the animated edge */
+html .btn--secondary {
+  border-color: transparent;
+}
+
+/* Disabled buttons get no edge at all — they must read as inert */
+html .btn--primary:disabled::after,
+html .btn:disabled::after {
+  display: none;
+}
+
+/* Reduced motion: keep the gradient edge, stop it moving */
+@media (prefers-reduced-motion: reduce) {
+  html .btn--primary::after,
+  html .btn--secondary::after {
+    animation: none;
+    background-position: 50% 50%;
+  }
+}
+
+/* ===========================================================================
+   HOVER FILL — retired in favour of the animated edge
+   The old ::before gradient washed the primary button to a light rose on
+   hover (measured ~2.6:1 against ivory text). The edge now carries the
+   color, so the face stays a solid, dark, measured background.
+   =========================================================================== */
+
+html .btn--primary::before,
+html .btn--secondary::before {
+  display: none;
+}
+
+html .btn--primary:hover,
+html .btn--primary:focus-visible {
+  background: var(--brown);
+  color: #fffdfa;
+}
+
+html .section--dark .btn--primary:hover,
+html .section--dark .btn--primary:focus-visible,
+html .footer__cta:hover,
+html .footer__cta:focus-visible {
+  background: var(--champagne);
+  color: var(--soft-black);
+}
+
+html .btn--secondary:hover,
+html .btn--secondary:focus-visible {
+  background: rgba(232, 210, 190, 0.55);
+  color: var(--brown);
+}
+
+html .section--dark .btn--secondary:hover,
+html .section--dark .btn--secondary:focus-visible {
+  background: rgba(232, 210, 190, 0.16);
+  color: var(--champagne);
+}

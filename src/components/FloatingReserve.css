@@ -1,0 +1,116 @@
+/* Hidden below 1100px — MobileBookingBar covers that range */
+@property --reserve-border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.floating-reserve {
+  display: none;
+}
+
+@media (min-width: 1101px) {
+  .floating-reserve {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    z-index: 95;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+
+    padding: 15px 26px;
+    border-radius: var(--radius);
+    background: var(--gold-deep);
+    color: #fffdfa;
+    box-shadow: 0 16px 40px -14px rgba(24, 17, 14, 0.55);
+
+    isolation: isolate;
+    overflow: hidden;
+    transition: background var(--transition), transform 200ms
+      cubic-bezier(0.4, 0, 0.2, 1), box-shadow var(--transition);
+  }
+
+  /* Blue light travels continuously around all four sides. */
+  .floating-reserve::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(
+      from var(--reserve-border-angle),
+      #1677ff 0deg,
+      #b9e3ff 68deg,
+      #42a5ff 132deg,
+      #004fc4 205deg,
+      #78c8ff 282deg,
+      #1677ff 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: reserve-border-spin 2.8s linear infinite;
+  }
+
+  .floating-reserve > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .floating-reserve__label {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .floating-reserve__meta {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: rgba(255, 253, 250, 0.82);
+    white-space: nowrap;
+  }
+
+  .floating-reserve:hover,
+  .floating-reserve:focus-visible {
+    background: var(--brown);
+    transform: translateY(-2px);
+    box-shadow: 0 22px 48px -14px rgba(24, 17, 14, 0.65);
+  }
+
+  .floating-reserve:hover::after,
+  .floating-reserve:focus-visible::after {
+    animation-duration: 1.6s;
+  }
+}
+
+@keyframes reserve-border-spin {
+  to {
+    --reserve-border-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-reserve::after {
+    animation: none;
+    background-position: 50% 50%;
+  }
+  .floating-reserve:hover,
+  .floating-reserve:focus-visible {
+    transform: none;
+  }
+}

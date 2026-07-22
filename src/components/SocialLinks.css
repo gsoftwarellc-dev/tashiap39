@@ -1,0 +1,129 @@
+.social {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.social__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-width: 46px;
+  min-height: 46px;
+  padding: 0 0.75rem;
+  border: 1px solid rgba(181, 138, 58, 0.45);
+  border-radius: var(--radius);
+  color: var(--brown);
+  transition: background var(--transition), border-color var(--transition),
+    color var(--transition), transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(42, 27, 21, 0.18);
+}
+
+.social__icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.social__icon--instagram {
+  background: radial-gradient(
+      circle at 32% 100%,
+      #ffd600 0 20%,
+      #ff7a00 36%,
+      #ff0169 58%,
+      transparent 76%
+    ),
+    linear-gradient(135deg, #7638fa 5%, #d300c5 55%, #ff0169 100%);
+}
+
+.social__icon--tiktok {
+  background: #010101;
+  text-shadow: -1.5px 0 #25f4ee, 1.5px 0 #fe2c55;
+}
+
+.social__icon--youtube {
+  background: #ff0000;
+  border-radius: 8px;
+}
+
+.social__label {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* Active links */
+a.social__link:hover,
+a.social__link:focus-visible {
+  background: var(--champagne);
+  border-color: var(--gold);
+  color: var(--brown);
+  transform: translateY(-2px);
+}
+
+/* Pending links are visibly inert — not clickable, not misleading */
+.social__link--pending {
+  opacity: 0.55;
+  cursor: not-allowed;
+  border-style: dashed;
+}
+
+/* ---- Dark variant (footer) ---- */
+
+.social--footer .social__link {
+  border-color: rgba(232, 210, 190, 0.35);
+  color: var(--champagne);
+}
+
+.social--footer a.social__link:hover,
+.social--footer a.social__link:focus-visible {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: var(--soft-black);
+}
+
+.social--footer .social__link--pending {
+  opacity: 0.5;
+}
+
+/* ---- Stacked variant (contact page) ---- */
+
+.social--stacked {
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.social--stacked .social__link {
+  width: 100%;
+  justify-content: flex-start;
+  padding: 0 1rem;
+  min-height: 52px;
+}
+
+@media (max-width: 560px) {
+  .social--footer {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.social__link:hover,
+  a.social__link:focus-visible {
+    transform: none;
+  }
+}
