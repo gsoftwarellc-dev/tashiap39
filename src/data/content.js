@@ -57,11 +57,11 @@ export const pillars = [
 ];
 
 export const readyTo = [
-  "Pause after spending so much time caring for others",
-  "Lay down the weight of visible and silent battles",
-  "Prioritize restoration and self-care without guilt",
-  "Reconnect with themselves in supportive sisterhood",
-  "Honor emotional, mental, physical, and spiritual healing",
+  "Release what no longer serves them",
+  "Embrace their divine feminine energy",
+  "Prioritize healing and self-care",
+  "Connect with like-minded women",
+  "Elevate mind, body, and spirit",
 ];
 
 /**
@@ -72,9 +72,16 @@ export const readyTo = [
  * obligation to the buyer. Rendered as placeholders until confirmed.
  */
 export const included = {
-  confirmed: false,
-  heading: "Your Retreat Experience Includes",
-  items: [],
+  confirmed: true,
+  heading: "What's Included",
+  items: [
+    "Guided Meditation & Spiritual Wellness",
+    "Spa & Relaxation Experiences",
+    "Healing Circles & Empowerment Sessions",
+    "Gourmet Dining & Refreshments",
+    "Beautiful Photo Opportunities",
+    "Sisterhood, Self-Love & Personal Growth",
+  ],
   // Must be answered explicitly — buyers will ask, and FAQ answers depend on it.
   needsExplicitAnswer: [
     "Is overnight accommodation included in the ticket price?",

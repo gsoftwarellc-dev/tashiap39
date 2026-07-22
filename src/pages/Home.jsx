@@ -9,6 +9,7 @@ import {
   pillars,
   readyTo,
   whatToExpect,
+  included,
   podcast,
   finalCta,
   mission,
@@ -110,6 +111,19 @@ export default function Home() {
           <Link to="/reserve" className="btn btn--primary">
             This Is My Time — Reserve My Spot
           </Link>
+        </div>
+      </Section>
+
+      {/* WHAT'S INCLUDED */}
+      <Section id="included" dark>
+        <SectionHeader center eyebrow="The Experience" heading={included.heading} />
+        <div className="included__grid">
+          {included.items.map((item) => (
+            <div key={item} className="included__card">
+              <span className="included__icon" aria-hidden="true" />
+              {item}
+            </div>
+          ))}
         </div>
       </Section>
 
